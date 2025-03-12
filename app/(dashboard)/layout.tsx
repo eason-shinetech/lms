@@ -1,3 +1,4 @@
+import ToasterProvider from "@/components/providers/toaster-provider";
 import Navbar from "./_components/navbar";
 import Sidebar from "./_components/sidebar";
 
@@ -14,7 +15,10 @@ export default function DashboardLayout({
       <div className="hidden md:flex h-full w-56 flex-col fixed inset-y-0 z-50">
         <Sidebar />
       </div>
-      <main className="h-full md:pl-56 pt-[80px]">{children}</main>
+      <main className="h-full md:pl-56 pt-[80px]">
+        <ToasterProvider />
+        {children}
+      </main>
     </div>
   );
 }
