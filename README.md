@@ -48,3 +48,7 @@ npx prisma init
    npx prisma generate
    npx prisma db push
    ```
+6. Check the data
+```bash
+npx prisma studio
+```
