@@ -52,3 +52,8 @@ npx prisma init
 ```bash
 npx prisma studio
 ```
+
+## Create Seed
+```bash
+node scripts/seed.ts
+```
