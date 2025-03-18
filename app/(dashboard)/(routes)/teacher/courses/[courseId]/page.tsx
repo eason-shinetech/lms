@@ -1,12 +1,13 @@
 import { IconBadge } from "@/components/icon-badge";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
-import { LayoutDashboard } from "lucide-react";
+import { CircleDollarSign, LayoutDashboard, ListCheck } from "lucide-react";
 import { redirect } from "next/navigation";
 import TitleForm from "./_components/title-form";
 import DescriptionForm from "./_components/description-form";
 import ImageForm from "./_components/image-form";
 import CategoryForm from "./_components/category-form";
+import PriceForm from "./_components/price-form";
 
 const CourseDetailPage = async ({
   params,
@@ -56,29 +57,48 @@ const CourseDetailPage = async ({
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
-        <div className="col-span-1 md:col-span-2">
+        <div>
           <div className="flex items-center gap-x-2">
             <IconBadge icon={LayoutDashboard} />
             <h2 className="text-xl">Customize your course</h2>
           </div>
+          <TitleForm initialData={course} courseId={course.id} />
+          <DescriptionForm
+            initialData={{ description: course?.description || "" }}
+            courseId={course.id}
+          />
+          <ImageForm
+            initialData={{ imageUrl: course?.imageUrl || "" }}
+            courseId={course.id}
+          />
+          <CategoryForm
+            initialData={{ categoryId: course?.categoryId || "" }}
+            courseId={course.id}
+            options={categories.map((category) => ({
+              label: category.name,
+              value: category.id,
+            }))}
+          />
         </div>
-        <TitleForm initialData={course} courseId={course.id} />
-        <DescriptionForm
-          initialData={{ description: course.description || "" }}
-          courseId={course.id}
-        />
-        <ImageForm
-          initialData={{ imageUrl: course.imageUrl || "" }}
-          courseId={course.id}
-        />
-        <CategoryForm
-          initialData={{ categoryId: course.categoryId || "" }}
-          courseId={course.id}
-          options={categories.map((category) => ({
-            label: category.name,
-            value: category.id,
-          }))}
-        />
+        <div className="space-y-6">
+          <div>
+            <div className="flex items-center gap-x-2">
+              <IconBadge icon={ListCheck} />
+              <h2 className="text-xl">Course chapters</h2>
+            </div>
+            <div>TODO: List chapters for course</div>
+          </div>
+          <div>
+            <div className="flex items-center gap-x-2">
+              <IconBadge icon={CircleDollarSign} />
+              <h2 className="text-xl">Sell your course</h2>
+            </div>
+            <PriceForm
+              initialData={{ price: course.price || 0 }}
+              courseId={course.id}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
