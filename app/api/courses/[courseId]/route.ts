@@ -25,3 +25,29 @@ export async function PATCH(
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
+
+export async function DELETE(
+  req: Request,
+  { params }: { params: { courseId: string } }
+) {
+  try {
+    const { userId } = await auth();
+    const { courseId } = await params;
+    if (!userId) return new NextResponse("Unauthorized", { status: 401 });
+    await db.chapter.deleteMany({
+      where: {
+        courseId,
+      },
+    });
+    const course = await db.course.delete({
+      where: {
+        id: courseId,
+        userId,
+      },
+    });
+    return NextResponse.json(course);
+  } catch (error) {
+    console.log("[COURSES_ID]", error);
+    return new NextResponse("Internal Error", { status: 500 });
+  }
+}
