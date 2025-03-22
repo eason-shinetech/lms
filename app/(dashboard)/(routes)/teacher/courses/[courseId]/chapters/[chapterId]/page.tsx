@@ -11,17 +11,16 @@ import ChapterVideoForm from "./_components/chapter-video-form";
 import Banner from "@/components/banner";
 import ChapterActions from "./_components/chapter-actions";
 
-const ChapterIdPage = async ({
-  params,
-}: {
-  params: { courseId: string; chapterId: string };
-}) => {
+type Props = Promise<{ courseId: string; chapterId: string }>;
+
+const ChapterIdPage = async ({ params }: { params: Props }) => {
   const { userId } = await auth();
   if (!userId) {
     return redirect("/");
   }
 
-  const { courseId, chapterId } = await params;
+  const { courseId, chapterId }: { courseId: string; chapterId: string } =
+    await params;
 
   const chapter = await db.chapter.findUnique({
     where: {

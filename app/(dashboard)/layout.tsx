@@ -1,6 +1,7 @@
 import ToasterProvider from "@/components/providers/toaster-provider";
 import Navbar from "./_components/navbar";
 import Sidebar from "./_components/sidebar";
+import ConfettiProvider from "@/components/providers/confetti-provider";
 
 export default function DashboardLayout({
   children,
@@ -16,6 +17,7 @@ export default function DashboardLayout({
         <Sidebar />
       </div>
       <main className="h-full md:pl-56 pt-[80px]">
+        <ConfettiProvider />
         <ToasterProvider />
         {children}
       </main>

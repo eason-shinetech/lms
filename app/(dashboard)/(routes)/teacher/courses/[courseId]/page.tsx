@@ -18,16 +18,14 @@ import ChaptersForm from "./_components/chapters-form";
 import Banner from "@/components/banner";
 import Actions from "./_components/actions";
 
-const CourseDetailPage = async ({
-  params,
-}: {
-  params: { courseId: string };
-}) => {
+type Props = Promise<{ courseId: string }>;
+
+const CourseDetailPage = async ({ params }: { params: Props }) => {
   const { userId } = await auth();
   if (!userId) {
     return redirect("/");
   }
-  const { courseId } = await params;
+  const { courseId }: { courseId: string } = await params;
   const course = await db.course.findUnique({
     where: {
       id: courseId,
@@ -77,7 +75,7 @@ const CourseDetailPage = async ({
         <Banner label="This course is not published yet" variant="warning" />
       )}
       <div className="p-6">
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-between">
           <div className="flex flex-col gap-y-2">
             <h1 className="text-2xl font-medium">Course setup</h1>
             <span className="text-sm text-slate-700">
