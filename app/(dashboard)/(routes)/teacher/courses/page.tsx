@@ -2,7 +2,6 @@ import { auth } from "@clerk/nextjs/server";
 import { columns } from "./_components/columns";
 import { DataTable } from "./_components/data-table";
 import { redirect } from "next/navigation";
-import axios from "axios";
 import { db } from "@/lib/db";
 
 const CoursesPage = async () => {
