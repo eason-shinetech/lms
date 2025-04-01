@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import axios from "axios";
@@ -71,7 +72,7 @@ export const VideoPlayer = ({
           </p>
         </div>
       )}
-      {!isLocked && (
+      {/* {!isLocked && (
         <MuxPlayer
           title={title}
           className={cn(
@@ -82,7 +83,7 @@ export const VideoPlayer = ({
           autoPlay
           playbackId={playbackId!}
         />
-      )}
+      )} */}
     </div>
   )
 }
